@@ -19,6 +19,9 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/favorite", require("./routes/favorite"));
+app.use("/api/video", require("./routes/video"));
+
+app.use("/uploads", express.static("uploads"));
 
 app.get("/api/hello", (req, res) => {
   res.send("Hello World!");
