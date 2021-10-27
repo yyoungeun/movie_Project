@@ -10,6 +10,7 @@ import Auth from "../hoc/auth";
 import MovieDetail from "./views/MovieDetail/MovieDetail.js";
 import FavoritePage from "./views/FavoritePage/FavoritePage.js";
 import VideoUploadPage from "./views/VideoUpload/VideoUploadPage.js";
+import VideoDetailPage from "./views/VideoDetailPage/VideoDetailPage.js";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -34,6 +35,11 @@ function App() {
             exact
             path="/videoUpload"
             component={Auth(VideoUploadPage, true)}
+          />
+          <Route
+            exact
+            path="/video/:videoId"
+            component={Auth(VideoDetailPage, null)}
           />
         </Switch>
       </div>
