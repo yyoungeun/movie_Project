@@ -4,6 +4,7 @@ import { UserOutlined } from "@ant-design/icons";
 import Axios from "axios";
 import LikeDislikes from "./Sections/LikeDislikes";
 import SideVideo from "./Sections/SideVideo";
+import Subscribe from "./Sections/Subscribe";
 
 function VideoDetailPage(props) {
   const videoId = props.match.params.videoId;
@@ -23,6 +24,8 @@ function VideoDetailPage(props) {
     });
   }, []);
   if (VideoDetail.writer) {
+    const subscribeButton = VideoDetail.writer._id !==
+      localStorage.getItem("userId") && <Subscribe />;
     return (
       <Row gutter={[16, 16]}>
         <Col lg={18} xs={24}>
@@ -34,7 +37,16 @@ function VideoDetailPage(props) {
               controls
             />
             {/* 좋아요 / 싫어요 / 구독 */}
-            <List.Item actions={[<LikeDislikes video userId videoId />]}>
+            <List.Item
+              actions={[
+                <LikeDislikes
+                  video
+                  userId={localStorage.getItem("userId")}
+                  videoId={videoId}
+                />,
+                subscribeButton,
+              ]}
+            >
               {/* 작성자 */}
               <List.Item.Meta
                 avatar={
