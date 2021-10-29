@@ -7,16 +7,20 @@ function LikeDislikes(props) {
   const [Dislikes, setDislikes] = useState(0);
   const [LikeAction, setLikeAction] = useState(null);
   const [DisLikeAction, setDisLikeAction] = useState(null);
-  let variable = {
-    videoId: props.videoId,
-    userId: props.userId,
-  };
+
+  let variable = {};
+  if (props.video) {
+    variable = { videoId: props.videoId, userId: props.userId };
+  } else {
+    variable = { userId: props.userId, commentId: props.commentId };
+  }
 
   useEffect(() => {
     // 현재 좋아요 수
     Axios.post("/api/like/getLikes", variable).then((response) => {
       if (response.data.success) {
         console.log("getlikes", response.data.likes.length);
+        setLikes(response.data.likes.length);
 
         // 이미 좋아요 눌렀는지? (현재 id기준)
         response.data.likes.map((like) => {
@@ -33,6 +37,7 @@ function LikeDislikes(props) {
     Axios.post("/api/like/getDisLikes", variable).then((response) => {
       if (response.data.success) {
         console.log("getdislikes", response.data.dislikes.length);
+        setDislikes(response.data.dislikes.length);
         // 이미 싫어요 눌렀는지? (현재 id기준)
         response.data.dislikes.map((like) => {
           if (like.userId === props.userId) {
@@ -112,7 +117,7 @@ function LikeDislikes(props) {
             onClick={onLike}
           />
         </Tooltip>
-        <span style={{ paddingLeft: "8px", cursor: "auto" }}>Likes</span>
+        <span style={{ paddingLeft: "8px", cursor: "auto" }}>{Likes}</span>
       </span>
       &nbsp;&nbsp;
       <span key="comment-basic-dislike">
@@ -123,7 +128,7 @@ function LikeDislikes(props) {
             onClick={onDisLike}
           />
         </Tooltip>
-        <span style={{ paddingLeft: "8px", cursor: "auto" }}>DisLikes</span>
+        <span style={{ paddingLeft: "8px", cursor: "auto" }}>{Dislikes}</span>
       </span>
     </div>
   );

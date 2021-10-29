@@ -5,22 +5,37 @@ import Axios from "axios";
 import LikeDislikes from "./Sections/LikeDislikes";
 import SideVideo from "./Sections/SideVideo";
 import Subscribe from "./Sections/Subscribe";
+import Comment from "./Sections/Comment";
 
 function VideoDetailPage(props) {
   const videoId = props.match.params.videoId;
   const variable = { videoId: videoId };
   const [VideoDetail, setVideoDetail] = useState([]);
+  const [Comments, setComments] = useState([]);
   useEffect(() => {
+    // 비디오 정보
     Axios.post("/api/video/getVideoDetail", variable).then((response) => {
       if (response.data.success) {
         console.log(response.data.videoDetail);
-        console.log(response.data.videoDetail.writer);
         setVideoDetail(response.data.videoDetail);
       } else {
         alert("비디오 정보를 가져오는데 실패했습니다.");
       }
     });
+    // 댓글 정보
+    Axios.post("/api/comment/getComments", variable).then((response) => {
+      if (response.data.success) {
+        console.log("getComments", response.data.getComments);
+        setComments(response.data.getComments);
+      } else {
+        alert("댓글 정보를 조회하지 못했습니다.");
+      }
+    });
   }, []);
+
+  const refreshFunction = (newComment) => {
+    setComments(Comments.concat(newComment));
+  };
   if (VideoDetail.writer) {
     const subscribeButton = VideoDetail.writer._id !==
       localStorage.getItem("userId") && (
@@ -66,6 +81,11 @@ function VideoDetailPage(props) {
               />
             </List.Item>
             {/* 댓글 */}
+            <Comment
+              commentLists={Comments}
+              videoId={videoId}
+              refreshFunction={refreshFunction}
+            />
           </div>
         </Col>
         <Col lg={6} xs={24}>

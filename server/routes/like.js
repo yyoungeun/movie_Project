@@ -8,21 +8,38 @@ const router = express.Router();
 //======================================
 
 router.post("/getLikes", (req, res) => {
-  Like.find({ videoId: req.body.videoId }).exec((err, likes) => {
+  let variable = {};
+  if (req.body.videoId) {
+    variable = { videoId: req.body.videoId };
+  } else {
+    variable = { commentId: req.body.commentId };
+  }
+  Like.find(variable).exec((err, likes) => {
     if (err) return res.status(400).send(err);
     return res.status(200).json({ success: true, likes });
   });
 });
 
 router.post("/getDisLikes", (req, res) => {
-  DisLike.find({ videoId: req.body.videoId }).exec((err, dislikes) => {
+  let variable = {};
+  if (req.body.videoId) {
+    variable = { videoId: req.body.videoId };
+  } else {
+    variable = { commentId: req.body.commentId };
+  }
+  DisLike.find(variable).exec((err, dislikes) => {
     if (err) return res.status(400).send(err);
     return res.status(200).json({ success: true, dislikes });
   });
 });
 
 router.post("/upLike", (req, res) => {
-  let variable = { videoId: req.body.videoId, userId: req.body.userId };
+  let variable = {};
+  if (req.body.videoId) {
+    variable = { videoId: req.body.videoId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
 
   const like = new Like(variable);
   like.save((err, likeResult) => {
@@ -37,7 +54,12 @@ router.post("/upLike", (req, res) => {
 });
 
 router.post("/unLike", (req, res) => {
-  let variable = { videoId: req.body.videoId, userId: req.body.userId };
+  let variable = {};
+  if (req.body.videoId) {
+    variable = { videoId: req.body.videoId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
 
   Like.findOneAndDelete(variable).exec((err, result) => {
     if (err) return res.status(400).json({ success: false, err });
@@ -46,7 +68,12 @@ router.post("/unLike", (req, res) => {
 });
 
 router.post("/upDislike", (req, res) => {
-  let variable = { videoId: req.body.videoId, userId: req.body.userId };
+  let variable = {};
+  if (req.body.videoId) {
+    variable = { videoId: req.body.videoId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
 
   const dislike = new DisLike(variable);
 
@@ -62,7 +89,12 @@ router.post("/upDislike", (req, res) => {
 });
 
 router.post("/unDislike", (req, res) => {
-  let variable = { videoId: req.body.videoId, userId: req.body.userId };
+  let variable = {};
+  if (req.body.videoId) {
+    variable = { videoId: req.body.videoId, userId: req.body.userId };
+  } else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+  }
 
   DisLike.findOneAndDelete(variable).exec((err, dislikeresult) => {
     if (err) return res.status(400).json({ success: false, err });
