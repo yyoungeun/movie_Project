@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const { Video } = require("../models/Video");
+const { Subscribe } = require("../models/Subscribe");
 
 //Storage multer config
 const storage = multer.diskStorage({
@@ -124,4 +125,28 @@ router.post("/getSideVideos", (req, res) => {
     });
 });
 
+//=======================================
+//             SubscribePage
+//=======================================
+
+router.post("/getSubscribeVideos", (req, res) => {
+  // 구독한 id 찾기 (현재 id기준)
+  Subscribe.find({ userFrom: req.body.userFrom }).exec((err, subscribeInfo) => {
+    if (err) return res.status(400).send(err);
+
+    // success: true => userTo 찾기
+    let subscribedUser = [];
+    subscribeInfo.map((subscriber, index) => {
+      subscribedUser.push(subscriber.userTo);
+    });
+
+    //userTo의 비디오 조회
+    Video.find({ writer: { $in: subscribedUser } })
+      .populate("writer")
+      .exec((err, videos) => {
+        if (err) return res.status(400).send(err);
+        return res.status(200).json({ success: true, videos });
+      });
+  });
+});
 module.exports = router;

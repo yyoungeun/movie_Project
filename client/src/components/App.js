@@ -11,6 +11,7 @@ import MovieDetail from "./views/MovieDetail/MovieDetail.js";
 import FavoritePage from "./views/FavoritePage/FavoritePage.js";
 import VideoUploadPage from "./views/VideoUpload/VideoUploadPage.js";
 import VideoDetailPage from "./views/VideoDetailPage/VideoDetailPage.js";
+import Subscribe from "./views/SubscribePage/SubscribePage.js";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -41,6 +42,7 @@ function App() {
             path="/video/:videoId"
             component={Auth(VideoDetailPage, null)}
           />
+          <Route exact path="/subscribe" component={Auth(Subscribe, true)} />
         </Switch>
       </div>
       <Footer />

@@ -10,14 +10,12 @@ function VideoDetailPage(props) {
   const videoId = props.match.params.videoId;
   const variable = { videoId: videoId };
   const [VideoDetail, setVideoDetail] = useState([]);
-  const [VideoDetailWriter, setVideoDetailWriter] = useState([]);
   useEffect(() => {
     Axios.post("/api/video/getVideoDetail", variable).then((response) => {
       if (response.data.success) {
         console.log(response.data.videoDetail);
         console.log(response.data.videoDetail.writer);
         setVideoDetail(response.data.videoDetail);
-        setVideoDetailWriter(response.data.videoDetail.writer);
       } else {
         alert("비디오 정보를 가져오는데 실패했습니다.");
       }
@@ -25,7 +23,12 @@ function VideoDetailPage(props) {
   }, []);
   if (VideoDetail.writer) {
     const subscribeButton = VideoDetail.writer._id !==
-      localStorage.getItem("userId") && <Subscribe />;
+      localStorage.getItem("userId") && (
+      <Subscribe
+        userTo={VideoDetail.writer._id}
+        userFrom={localStorage.getItem("userId")}
+      />
+    );
     return (
       <Row gutter={[16, 16]}>
         <Col lg={18} xs={24}>
@@ -56,7 +59,9 @@ function VideoDetailPage(props) {
                     icon={<UserOutlined />}
                   />
                 }
-                title={VideoDetailWriter.email}
+                title={
+                  VideoDetail.writer.lastname + VideoDetail.writer.firstname
+                }
                 description={VideoDetail.description}
               />
             </List.Item>
