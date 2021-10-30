@@ -17,7 +17,7 @@ function FavoritePage() {
       userFrom: localStorage.getItem("userId"),
     }).then((response) => {
       if (response.data.success) {
-        console.log(response.data.favorites);
+        //console.log(response.data.favorites);
         setFavorites(response.data.favorites);
       } else {
         alert("영화 정보 가져오기 실패했습니다.");

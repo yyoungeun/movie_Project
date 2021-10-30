@@ -14,20 +14,20 @@ function MovieDetail(props) {
   const [ToggleActor, setToggleActor] = useState(false);
 
   useEffect(() => {
-    console.log("props.match", props);
+    //console.log("props.match", props);
     let endpointInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}`;
     let endpointcast = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
     fetch(endpointInfo)
       .then((response) => response.json())
       .then((response) => {
-        console.log("endpointInfo", response);
+        //console.log("endpointInfo", response);
         setMovie(response);
       });
 
     fetch(endpointcast)
       .then((response) => response.json())
       .then((response) => {
-        console.log("endpointcast", response);
+        //console.log("endpointcast", response);
         setCasts(response.cast);
       });
   }, []);

@@ -21,7 +21,7 @@ function LandingPage() {
   useEffect(() => {
     Axios.get("/api/video/getVideos").then((response) => {
       if (response.data.success) {
-        console.log("video", response.data);
+        //console.log("video", response.data);
         setVideo(response.data.videos);
       } else {
         alert("비디오 가져오기 실패ㅠ");
@@ -37,7 +37,7 @@ function LandingPage() {
     fetch(endpoint)
       .then((response) => response.json())
       .then((response) => {
-        console.log("response", response);
+        //console.log("response", response);
         setMovies([...Movies, ...response.results]);
         setMainMovieImage(response.results[0]);
         setCurrentPage(response.page);

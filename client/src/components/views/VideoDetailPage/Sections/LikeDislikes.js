@@ -19,7 +19,7 @@ function LikeDislikes(props) {
     // 현재 좋아요 수
     Axios.post("/api/like/getLikes", variable).then((response) => {
       if (response.data.success) {
-        console.log("getlikes", response.data.likes.length);
+        //console.log("getlikes", response.data.likes.length);
         setLikes(response.data.likes.length);
 
         // 이미 좋아요 눌렀는지? (현재 id기준)
@@ -36,7 +36,7 @@ function LikeDislikes(props) {
     // 현재 싫어요 수
     Axios.post("/api/like/getDisLikes", variable).then((response) => {
       if (response.data.success) {
-        console.log("getdislikes", response.data.dislikes.length);
+        //console.log("getdislikes", response.data.dislikes.length);
         setDislikes(response.data.dislikes.length);
         // 이미 싫어요 눌렀는지? (현재 id기준)
         response.data.dislikes.map((like) => {

@@ -22,10 +22,10 @@ function Favorite(props) {
 
   //현재 좋아요 수 정보
   useEffect(() => {
-    console.log("FavoriteNumber", FavoriteNumber);
+    //console.log("FavoriteNumber", FavoriteNumber);
     Axios.post("/api/favorite/favoriteNumber", variables).then((response) => {
       if (response.data.success) {
-        console.log(response.data.favoriteNumber);
+        //console.log(response.data.favoriteNumber);
         setFavoriteNumber(response.data.favoriteNumber);
         //console.log("favoriteNumber", FavoriteNumber);
       } else {
@@ -38,7 +38,7 @@ function Favorite(props) {
       if (response.data.success) {
         //console.log("favorited", response.data);
         setFavorited(response.data.favorited);
-        console.log("favorited", Favorited);
+        //console.log("favorited", Favorited);
       } else {
         alert("현재 좋아요 상태를 가져오지 못했습니다.");
       }
@@ -53,7 +53,7 @@ function Favorite(props) {
           if (response.data.success) {
             setFavoriteNumber(FavoriteNumber - 1);
             setFavorited(!Favorited);
-            console.log("removeFromFavorite", FavoriteNumber);
+            //console.log("removeFromFavorite", FavoriteNumber);
           } else {
             alert("좋아요 취소 오류입니다.");
           }
@@ -65,7 +65,7 @@ function Favorite(props) {
         if (response.data.success) {
           setFavoriteNumber(FavoriteNumber + 1);
           setFavorited(!Favorited);
-          console.log("addToFavorite", FavoriteNumber);
+          //console.log("addToFavorite", FavoriteNumber);
         } else {
           alert("좋아요 실패!");
         }

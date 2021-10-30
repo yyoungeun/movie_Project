@@ -10,7 +10,7 @@ function Subscribe(props) {
     // 현재 구독자 수
     Axios.post("/api/subscribe/SubscribeNumber", variable).then((response) => {
       if (response.data.success) {
-        console.log("subscibeNumber", response.data.subscibeNumber);
+        //console.log("subscibeNumber", response.data.subscibeNumber);
         setSubscribeNumber(response.data.subscibeNumber);
       } else {
         alert("구독자 수를 불러오지 못했습니다.");
@@ -25,7 +25,7 @@ function Subscribe(props) {
     Axios.post("/api/subscribe/Subscribed", subscribedVariable).then(
       (response) => {
         if (response.data.success) {
-          console.log("subscribed", response.data.subscribed);
+          //console.log("subscribed", response.data.subscribed);
           setSubscribed(response.data.subscribed);
         } else {
           alert("현재 구독 상태를 불러오지 못했습니다.");
@@ -43,7 +43,7 @@ function Subscribe(props) {
       // 구독 취소
       Axios.post("/api/subscribe/unSubscribe", variable).then((response) => {
         if (response.data.success) {
-          console.log("unsubscrie", response.data);
+          //console.log("unsubscrie", response.data);
           setSubscribeNumber(SubscribeNumber - 1);
           setSubscribed(!Subscribed);
         } else {
@@ -54,7 +54,7 @@ function Subscribe(props) {
       // 구독 추가
       Axios.post("/api/subscribe/upscuscribe", variable).then((response) => {
         if (response.data.success) {
-          console.log("subscribe", response.data);
+          //console.log("subscribe", response.data);
           setSubscribeNumber(SubscribeNumber + 1);
           setSubscribed(!Subscribed);
         } else {

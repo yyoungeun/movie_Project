@@ -17,7 +17,7 @@ function VideoDetailPage(props) {
     // 비디오 정보
     Axios.post("/api/video/getVideoDetail", variable).then((response) => {
       if (response.data.success) {
-        console.log(response.data.videoDetail);
+        //console.log(response.data.videoDetail);
         setVideoDetail(response.data.videoDetail);
       } else {
         alert("비디오 정보를 가져오는데 실패했습니다.");
@@ -27,7 +27,7 @@ function VideoDetailPage(props) {
     Axios.post("/api/comment/getComments", variable).then((response) => {
       if (response.data.success) {
         setComments(response.data.comments);
-        console.log("comments", response.data.comments);
+        //console.log("comments", response.data.comments);
       } else {
         alert("댓글 정보를 조회하지 못했습니다.");
       }
@@ -70,13 +70,15 @@ function VideoDetailPage(props) {
               <List.Item.Meta
                 avatar={
                   <Avatar
-                    src="https://joeschmoe.io/api/v1/random"
+                    src="https://joeschmoe.io/api/v1/jess"
                     size="large"
                     icon={<UserOutlined />}
                   />
                 }
                 title={
-                  VideoDetail.writer.lastname + VideoDetail.writer.firstname
+                  VideoDetail.writer.lastname +
+                  " " +
+                  VideoDetail.writer.firstname
                 }
                 description={VideoDetail.description}
               />
