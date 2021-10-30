@@ -10,11 +10,11 @@ const commmentSchema = mongoose.Schema(
     },
     videoId: {
       // 게시물 작성자
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "Video",
     },
     responseTo: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
     content: {

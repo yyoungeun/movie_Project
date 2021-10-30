@@ -12,6 +12,7 @@ function VideoDetailPage(props) {
   const variable = { videoId: videoId };
   const [VideoDetail, setVideoDetail] = useState([]);
   const [Comments, setComments] = useState([]);
+
   useEffect(() => {
     // 비디오 정보
     Axios.post("/api/video/getVideoDetail", variable).then((response) => {
@@ -25,8 +26,8 @@ function VideoDetailPage(props) {
     // 댓글 정보
     Axios.post("/api/comment/getComments", variable).then((response) => {
       if (response.data.success) {
-        console.log("getComments", response.data.getComments);
-        setComments(response.data.getComments);
+        setComments(response.data.comments);
+        console.log("comments", response.data.comments);
       } else {
         alert("댓글 정보를 조회하지 못했습니다.");
       }

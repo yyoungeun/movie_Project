@@ -9,15 +9,15 @@ const router = express.Router();
 router.post("/getComments", (req, res) => {
   Comment.find({ videoId: req.body.videoId })
     .populate("writer")
-    .exec((err, getComments) => {
+    .exec((err, comments) => {
       if (err) return res.status(400).send(err);
-      return res.status(200).json({ success: true, getComments });
+      res.status(200).json({ success: true, comments });
     });
 });
 
-//=================================
-//             Comment
-//=================================
+//=========================================
+//             Comment, SingleComment
+//=========================================
 
 router.post("/saveComment", (req, res) => {
   const comment = new Comment(req.body);
@@ -28,7 +28,7 @@ router.post("/saveComment", (req, res) => {
       .populate("writer")
       .exec((err, result) => {
         if (err) return res.json({ success: false, err });
-        return res.status(200).json({ success: true, result });
+        res.status(200).json({ success: true, result });
       });
   });
 });
