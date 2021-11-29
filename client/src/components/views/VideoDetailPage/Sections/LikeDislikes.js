@@ -39,8 +39,8 @@ function LikeDislikes(props) {
         //console.log("getdislikes", response.data.dislikes.length);
         setDislikes(response.data.dislikes.length);
         // 이미 싫어요 눌렀는지? (현재 id기준)
-        response.data.dislikes.map((like) => {
-          if (like.userId === props.userId) {
+        response.data.dislikes.map((dislike) => {
+          if (dislike.userId === props.userId) {
             setDisLikeAction("disliked");
           }
         });

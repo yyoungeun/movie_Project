@@ -8,11 +8,11 @@ const dislikeSchema = mongoose.Schema(
       ref: "User",
     },
     commentId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "Comment",
     },
     videoId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "Video",
     },
   },
