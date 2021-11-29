@@ -70,15 +70,16 @@ function Subscribe(props) {
           background: `${Subscribed ? "#ADADAD" : "#CC0000"}`,
           borderRadius: "4px",
           color: "white",
-          padding: "10px 16px",
+          padding: "5px 11px",
           fontWeight: "500",
           fontSize: "1rem",
           textTransform: "uppercase",
         }}
         onClick={onSubscribeHandler}
       >
-        구독
+        {Subscribed ? "구독 중" : "구독 하기"}
         <BellFilled />
+        <br />
         {SubscribeNumber}
       </button>
     </div>
