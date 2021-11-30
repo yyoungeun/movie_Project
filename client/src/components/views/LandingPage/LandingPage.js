@@ -37,7 +37,8 @@ function LandingPage() {
     fetch(endpoint)
       .then((response) => response.json())
       .then((response) => {
-        //console.log("response", response);
+        console.log("response", response);
+        //기존 Movie data에 data추가 연결
         setMovies([...Movies, ...response.results]);
         setMainMovieImage(response.results[0]);
         setCurrentPage(response.page);

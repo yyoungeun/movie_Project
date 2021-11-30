@@ -32,6 +32,7 @@ function FavoritePage() {
     Axios.post("/api/favorite/removeFromFavorite", variables).then(
       (response) => {
         if (response.data.success) {
+          // 새로운 결과값 렌더링 (다시 호출)
           fetchFavoritedMovie();
         } else alert("리스트 삭제 실패!");
       }
