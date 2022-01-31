@@ -15,6 +15,7 @@ app.use(cookieParser());
 app.use(cors());
 mongoose
   .connect(config.mongoURI)
+  .then(() => console.log("process.env.NODE_ENV", process.env.NODE_ENV))
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
